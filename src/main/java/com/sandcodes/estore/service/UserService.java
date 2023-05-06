@@ -1,11 +1,13 @@
 package com.sandcodes.estore.service;
 
-import com.sandcodes.estore.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.sandcodes.estore.model.User;
 
-@Service
-public class UserService {
-    @Autowired
-    private UserRepository userRepository;
+import java.util.List;
+import java.util.Optional;
+
+public interface UserService {
+    void save(User user);
+    Optional<User> findByEmail(String email);
+
+    List<User> getAllUsers();
 }

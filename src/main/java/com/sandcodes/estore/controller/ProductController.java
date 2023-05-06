@@ -4,9 +4,11 @@ import com.sandcodes.estore.model.Product;
 import com.sandcodes.estore.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -16,18 +18,17 @@ public class ProductController {
     private ProductRepository productRepository;
 
     @GetMapping
-    public List<Product> getAllProducts(){
-        return productRepository.findAll();
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity<List<Product>> getAllProducts() {
+        List<Product> products = productRepository.findAll();
+        return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
     @PostMapping
-    public Product createProduct(@RequestBody Product product){
-        return productRepository.save(product);
-    }
-
-    @GetMapping("/{id}")
-    public Product getProductById(@PathVariable Long id){
-        return productRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity<String> addProduct(@RequestBody Product product) {
+        product.setCreatedAt(new Date());
+        productRepository.save(product);
+        return new ResponseEntity<>("Product added successfully!", HttpStatus.OK);
     }
 }

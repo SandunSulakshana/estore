@@ -1,17 +1,44 @@
 package com.sandcodes.estore.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+
+import java.util.Date;
 
 @Entity
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String firstName;
     private String lastName;
-    @Id
     private String email;
     private String password;
+    private Date createdAt;
+
     private String userType;
-    private String createdAt;
+
+    public User(String firstName, String lastName, String email, String password, Date createdAt, String userType) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.createdAt = createdAt;
+        this.userType = userType;
+    }
+
+    public User() {
+    }
+
+    public String getuserType() {
+        return userType;
+    }
+
+    public void setuserType(String userType) {
+        this.userType = userType;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -45,19 +72,11 @@ public class User {
         this.password = password;
     }
 
-    public String getUserType() {
-        return userType;
-    }
-
-    public void setUserType(String userType) {
-        this.userType = userType;
-    }
-
-    public String getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 }

@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import java.util.Date;
 
 import java.math.BigDecimal;
 
@@ -12,9 +13,10 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String description;
+    private String title;
+    private String imgUrl;
     private String price;
+    private Date createdAt;
 
     public Product() {
     }
@@ -27,20 +29,20 @@ public class Product {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String gettitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void settitle(String title) {
+        this.title = title;
     }
 
-    public String getDescription() {
-        return description;
+    public String getimgUrl() {
+        return imgUrl;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setimgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
     public String getPrice() {
@@ -49,5 +51,12 @@ public class Product {
 
     public void setPrice(String price) {
         this.price = price;
+    }
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 }
